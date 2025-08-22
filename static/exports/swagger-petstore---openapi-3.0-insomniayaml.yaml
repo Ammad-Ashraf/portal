@@ -1,0 +1,444 @@
+_type: export
+__export_format: 4
+__export_source: apimatic.transformer
+resources:
+- name: Swagger Petstore - OpenAPI 3.0
+  _type: workspace
+  _id: wrk_aeefe56ee9134e64a54a65afc9df0fe0
+  description: >-
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+
+    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
+
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+
+
+    Some useful links:
+
+    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
+
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+- name: production
+  data:
+    default: https://petstore3.swagger.io/api/v3
+    authserver: https://petstore3.swagger.io/oauth
+  _type: environment
+  _id: env_98ddfda99f2e4713a4ae1543bf2db7a8
+  parentId: wrk_aeefe56ee9134e64a54a65afc9df0fe0
+- name: pet
+  _type: request_group
+  _id: fld_7c13c2b24dff4572ae56e81287a3cd52
+  parentId: wrk_aeefe56ee9134e64a54a65afc9df0fe0
+  description: Everything about your Pets
+- name: store
+  _type: request_group
+  _id: fld_86fff1327e50447d9c662b4b702ad90e
+  parentId: wrk_aeefe56ee9134e64a54a65afc9df0fe0
+  description: Access to Petstore orders
+- name: user
+  _type: request_group
+  _id: fld_5819c4d2176549ce9cd3bc97a29336b7
+  parentId: wrk_aeefe56ee9134e64a54a65afc9df0fe0
+  description: Operations about user
+- name: updatePet
+  method: PUT
+  url: '{{default}}/pet'
+  body:
+    mimeType: application/x-www-form-urlencoded
+    params:
+    - type: text
+      name: name
+      value: doggie
+      disabled: false
+    - type: text
+      name: photoUrls
+      value: '["photoUrls62"]'
+      disabled: false
+    - type: text
+      name: id
+      value: '10'
+      disabled: false
+    - type: text
+      name: category
+      value: '{"id":102,"name":"name73"}'
+      disabled: false
+    - type: text
+      name: tags
+      value: '[{"id":124,"name":"name70"}]'
+      disabled: false
+    - type: text
+      name: status
+      value: pending
+      disabled: false
+  headers:
+  - name: Content-Type
+    value: application/x-www-form-urlencoded
+    disabled: false
+  authentication:
+    type: oauth2
+    authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+    grantType: implicit
+  _type: request
+  _id: req_c3a4299753374b3da2b814a8f27c1db9
+  parentId: fld_7c13c2b24dff4572ae56e81287a3cd52
+  description: Update an existing pet by Id.
+- name: addPet
+  method: POST
+  url: '{{default}}/pet'
+  body:
+    mimeType: application/x-www-form-urlencoded
+    params:
+    - type: text
+      name: name
+      value: doggie
+      disabled: false
+    - type: text
+      name: photoUrls
+      value: '["photoUrls64"]'
+      disabled: false
+    - type: text
+      name: id
+      value: '10'
+      disabled: false
+    - type: text
+      name: category
+      value: '{"id":102,"name":"name73"}'
+      disabled: false
+    - type: text
+      name: tags
+      value: '[{"id":124,"name":"name70"}]'
+      disabled: false
+    - type: text
+      name: status
+      value: available
+      disabled: false
+  headers:
+  - name: Content-Type
+    value: application/x-www-form-urlencoded
+    disabled: false
+  authentication:
+    type: oauth2
+    authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+    grantType: implicit
+  _type: request
+  _id: req_26cfe3fab766413a9aae6ad011c0ac8d
+  parentId: fld_7c13c2b24dff4572ae56e81287a3cd52
+  description: Add a new pet to the store.
+- name: findPetsByStatus
+  method: GET
+  url: '{{default}}/pet/findByStatus'
+  parameters:
+  - name: status
+    value: available
+    disabled: false
+  authentication:
+    type: oauth2
+    authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+    grantType: implicit
+  _type: request
+  _id: req_89f8832e26f140ff99beb2469be431ac
+  parentId: fld_7c13c2b24dff4572ae56e81287a3cd52
+  description: Multiple status values can be provided with comma separated strings.
+- name: findPetsByTags
+  method: GET
+  url: '{{default}}/pet/findByTags'
+  parameters:
+  - name: tags
+    value: '["tags29"]'
+    disabled: false
+  authentication:
+    type: oauth2
+    authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+    grantType: implicit
+  _type: request
+  _id: req_4817996dc55a4705a4d0bfce4d16e814
+  parentId: fld_7c13c2b24dff4572ae56e81287a3cd52
+  description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
+- name: getPetById
+  method: GET
+  url: '{{default}}/pet/{petId}'
+  headers:
+  - name: api_key
+    value: api_key68
+    disabled: false
+  _type: request
+  _id: req_9a3cdf2d336d4ed4b6ff281d1a56c8cf
+  parentId: fld_7c13c2b24dff4572ae56e81287a3cd52
+  description: Returns a single pet.
+- name: updatePetWithForm
+  method: POST
+  url: '{{default}}/pet/{petId}'
+  parameters:
+  - name: name
+    value: name2
+    disabled: false
+  - name: status
+    value: status98
+    disabled: false
+  authentication:
+    type: oauth2
+    authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+    grantType: implicit
+  _type: request
+  _id: req_e1b644c1e7584b30bdbe09dda588756e
+  parentId: fld_7c13c2b24dff4572ae56e81287a3cd52
+  description: Updates a pet resource based on the form data.
+- name: deletePet
+  method: DELETE
+  url: '{{default}}/pet/{petId}'
+  headers:
+  - name: api_key
+    value: api_key85
+    disabled: false
+  authentication:
+    type: oauth2
+    authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+    grantType: implicit
+  _type: request
+  _id: req_8198f177b9aa475293105be9de0b469f
+  parentId: fld_7c13c2b24dff4572ae56e81287a3cd52
+  description: Delete a pet.
+- name: uploadFile
+  method: POST
+  url: '{{default}}/pet/{petId}/uploadImage'
+  body:
+    mimeType: multipart/form-data
+    params:
+    - type: file
+      name: body
+      value: path/to/file81
+      disabled: false
+  parameters:
+  - name: additionalMetadata
+    value: additionalMetadata55
+    disabled: false
+  headers:
+  - name: Content-Type
+    value: application/octet-stream
+    disabled: false
+  authentication:
+    type: oauth2
+    authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+    grantType: implicit
+  _type: request
+  _id: req_3cd5d4480f5d4a71afe07e8726351afa
+  parentId: fld_7c13c2b24dff4572ae56e81287a3cd52
+  description: Upload image of the pet.
+- name: getInventory
+  method: GET
+  url: '{{default}}/store/inventory'
+  headers:
+  - name: api_key
+    value: api_key23
+    disabled: false
+  _type: request
+  _id: req_73d0bf28f7d24f099868b299270b6f85
+  parentId: fld_86fff1327e50447d9c662b4b702ad90e
+  description: Returns a map of status codes to quantities.
+- name: placeOrder
+  method: POST
+  url: '{{default}}/store/order'
+  body:
+    mimeType: application/x-www-form-urlencoded
+    params:
+    - type: text
+      name: id
+      value: '10'
+      disabled: false
+    - type: text
+      name: petId
+      value: '198772'
+      disabled: false
+    - type: text
+      name: quantity
+      value: '7'
+      disabled: false
+    - type: text
+      name: shipDate
+      value: 2025-11-12T08:46:22.3798511Z
+      disabled: false
+    - type: text
+      name: status
+      value: approved
+      disabled: false
+    - type: text
+      name: complete
+      value: 'true'
+      disabled: false
+  headers:
+  - name: Content-Type
+    value: application/x-www-form-urlencoded
+    disabled: false
+  _type: request
+  _id: req_e7714bdc75314b508149f00db41ca31f
+  parentId: fld_86fff1327e50447d9c662b4b702ad90e
+  description: Place a new order in the store.
+- name: getOrderById
+  method: GET
+  url: '{{default}}/store/order/{orderId}'
+  _type: request
+  _id: req_68095cfc1683460b8f9b105d0f2b4567
+  parentId: fld_86fff1327e50447d9c662b4b702ad90e
+  description: For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.
+- name: deleteOrder
+  method: DELETE
+  url: '{{default}}/store/order/{orderId}'
+  _type: request
+  _id: req_ae67c98ea0f144cfa172d516506d30f2
+  parentId: fld_86fff1327e50447d9c662b4b702ad90e
+  description: For valid response try integer IDs with value < 1000. Anything above 1000 or non-integers will generate API errors.
+- name: createUser
+  method: POST
+  url: '{{default}}/user'
+  body:
+    mimeType: application/x-www-form-urlencoded
+    params:
+    - type: text
+      name: id
+      value: '10'
+      disabled: false
+    - type: text
+      name: username
+      value: theUser
+      disabled: false
+    - type: text
+      name: firstName
+      value: John
+      disabled: false
+    - type: text
+      name: lastName
+      value: James
+      disabled: false
+    - type: text
+      name: email
+      value: john@email.com
+      disabled: false
+    - type: text
+      name: password
+      value: '12345'
+      disabled: false
+    - type: text
+      name: phone
+      value: '12345'
+      disabled: false
+    - type: text
+      name: userStatus
+      value: '1'
+      disabled: false
+  headers:
+  - name: Content-Type
+    value: application/x-www-form-urlencoded
+    disabled: false
+  _type: request
+  _id: req_9328fe3270a44cc8a188a8c88e72dbfb
+  parentId: fld_5819c4d2176549ce9cd3bc97a29336b7
+  description: This can only be done by the logged in user.
+- name: createUsersWithListInput
+  method: POST
+  url: '{{default}}/user/createWithList'
+  body:
+    mimeType: application/json
+    text: >-
+      [
+        {
+          "id": 149,
+          "username": "username54",
+          "firstName": "firstName2",
+          "lastName": "lastName94",
+          "email": "email37",
+          "password": "password34",
+          "phone": "phone73",
+          "userStatus": 142
+        }
+      ]
+  headers:
+  - name: Content-Type
+    value: application/json
+    disabled: false
+  _type: request
+  _id: req_29b80400eb234cf78154c70c4b521e93
+  parentId: fld_5819c4d2176549ce9cd3bc97a29336b7
+  description: Creates list of users with given input array.
+- name: loginUser
+  method: GET
+  url: '{{default}}/user/login'
+  parameters:
+  - name: username
+    value: username13
+    disabled: false
+  - name: password
+    value: password22
+    disabled: false
+  _type: request
+  _id: req_3e9ecc1fd1aa465ea7f07ed915c7bfb9
+  parentId: fld_5819c4d2176549ce9cd3bc97a29336b7
+  description: Log into the system.
+- name: logoutUser
+  method: GET
+  url: '{{default}}/user/logout'
+  _type: request
+  _id: req_78bd69852cde44e689f1764a30e22f3f
+  parentId: fld_5819c4d2176549ce9cd3bc97a29336b7
+  description: Log user out of the system.
+- name: getUserByName
+  method: GET
+  url: '{{default}}/user/{usersname}'
+  _type: request
+  _id: req_b2de3ab563cb4de3bc4724b54bfcdffc
+  parentId: fld_5819c4d2176549ce9cd3bc97a29336b7
+  description: Get user detail based on username.
+- name: updateUser
+  method: PUT
+  url: '{{default}}/user/{usersname}'
+  body:
+    mimeType: application/x-www-form-urlencoded
+    params:
+    - type: text
+      name: id
+      value: '10'
+      disabled: false
+    - type: text
+      name: username
+      value: theUser
+      disabled: false
+    - type: text
+      name: firstName
+      value: John
+      disabled: false
+    - type: text
+      name: lastName
+      value: James
+      disabled: false
+    - type: text
+      name: email
+      value: john@email.com
+      disabled: false
+    - type: text
+      name: password
+      value: '12345'
+      disabled: false
+    - type: text
+      name: phone
+      value: '12345'
+      disabled: false
+    - type: text
+      name: userStatus
+      value: '1'
+      disabled: false
+  headers:
+  - name: Content-Type
+    value: application/x-www-form-urlencoded
+    disabled: false
+  _type: request
+  _id: req_292f7498caaa4a6c89635d876ca20338
+  parentId: fld_5819c4d2176549ce9cd3bc97a29336b7
+  description: This can only be done by the logged in user.
+- name: deleteUser
+  method: DELETE
+  url: '{{default}}/user/{usersname}'
+  _type: request
+  _id: req_2fdd3a6e8a134e48ac6790e2198d8a65
+  parentId: fld_5819c4d2176549ce9cd3bc97a29336b7
+  description: This can only be done by the logged in user.

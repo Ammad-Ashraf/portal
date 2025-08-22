@@ -1,0 +1,609 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_source": "apimatic.transformer",
+  "resources": [
+    {
+      "name": "Swagger Petstore - OpenAPI 3.0",
+      "_type": "workspace",
+      "_id": "wrk_fbdbfe21aa7d4a3c8c4ba9afe8f4a5d6",
+      "description": "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!\nYou can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\nSome useful links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n- [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)"
+    },
+    {
+      "name": "production",
+      "data": {
+        "default": "https://petstore3.swagger.io/api/v3",
+        "authserver": "https://petstore3.swagger.io/oauth"
+      },
+      "_type": "environment",
+      "_id": "env_d7186a84fbef40c98be696e7b3fa8251",
+      "parentId": "wrk_fbdbfe21aa7d4a3c8c4ba9afe8f4a5d6"
+    },
+    {
+      "name": "pet",
+      "_type": "request_group",
+      "_id": "fld_7429ef19b75549e49a62e5a1dab8d9af",
+      "parentId": "wrk_fbdbfe21aa7d4a3c8c4ba9afe8f4a5d6",
+      "description": "Everything about your Pets"
+    },
+    {
+      "name": "store",
+      "_type": "request_group",
+      "_id": "fld_08b76efbc757484a8eeb863c7a43a8c7",
+      "parentId": "wrk_fbdbfe21aa7d4a3c8c4ba9afe8f4a5d6",
+      "description": "Access to Petstore orders"
+    },
+    {
+      "name": "user",
+      "_type": "request_group",
+      "_id": "fld_adbc4671cec84b85912b2956e723ff5e",
+      "parentId": "wrk_fbdbfe21aa7d4a3c8c4ba9afe8f4a5d6",
+      "description": "Operations about user"
+    },
+    {
+      "name": "updatePet",
+      "method": "PUT",
+      "url": "{{default}}/pet",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {
+            "type": "text",
+            "name": "name",
+            "value": "doggie",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "photoUrls",
+            "value": "[\"photoUrls92\"]",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "id",
+            "value": "10",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "category",
+            "value": "{\"id\":91,\"name\":\"name53\"}",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "tags",
+            "value": "[{\"id\":67,\"name\":\"name76\"}]",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "status",
+            "value": "pending",
+            "disabled": false
+          }
+        ]
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+          "disabled": false
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+        "grantType": "implicit"
+      },
+      "_type": "request",
+      "_id": "req_d2b6b8aee54947009d7e727f45e6e73c",
+      "parentId": "fld_7429ef19b75549e49a62e5a1dab8d9af",
+      "description": "Update an existing pet by Id."
+    },
+    {
+      "name": "addPet",
+      "method": "POST",
+      "url": "{{default}}/pet",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {
+            "type": "text",
+            "name": "name",
+            "value": "doggie",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "photoUrls",
+            "value": "[\"photoUrls70\"]",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "id",
+            "value": "10",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "category",
+            "value": "{\"id\":91,\"name\":\"name53\"}",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "tags",
+            "value": "[{\"id\":67,\"name\":\"name76\"}]",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "status",
+            "value": "pending",
+            "disabled": false
+          }
+        ]
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+          "disabled": false
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+        "grantType": "implicit"
+      },
+      "_type": "request",
+      "_id": "req_3e22172a11324b11a438100aecf0406c",
+      "parentId": "fld_7429ef19b75549e49a62e5a1dab8d9af",
+      "description": "Add a new pet to the store."
+    },
+    {
+      "name": "findPetsByStatus",
+      "method": "GET",
+      "url": "{{default}}/pet/findByStatus",
+      "parameters": [
+        {
+          "name": "status",
+          "value": "pending",
+          "disabled": false
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+        "grantType": "implicit"
+      },
+      "_type": "request",
+      "_id": "req_6355bcb6972a4021906c89c64efc7806",
+      "parentId": "fld_7429ef19b75549e49a62e5a1dab8d9af",
+      "description": "Multiple status values can be provided with comma separated strings."
+    },
+    {
+      "name": "findPetsByTags",
+      "method": "GET",
+      "url": "{{default}}/pet/findByTags",
+      "parameters": [
+        {
+          "name": "tags",
+          "value": "[\"tags17\"]",
+          "disabled": false
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+        "grantType": "implicit"
+      },
+      "_type": "request",
+      "_id": "req_65f6952ecd454943afb56b03bfed552c",
+      "parentId": "fld_7429ef19b75549e49a62e5a1dab8d9af",
+      "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing."
+    },
+    {
+      "name": "getPetById",
+      "method": "GET",
+      "url": "{{default}}/pet/{petId}",
+      "headers": [
+        {
+          "name": "api_key",
+          "value": "api_key29",
+          "disabled": false
+        }
+      ],
+      "_type": "request",
+      "_id": "req_e86c828efeb042ceb67ee76d50def500",
+      "parentId": "fld_7429ef19b75549e49a62e5a1dab8d9af",
+      "description": "Returns a single pet."
+    },
+    {
+      "name": "updatePetWithForm",
+      "method": "POST",
+      "url": "{{default}}/pet/{petId}",
+      "parameters": [
+        {
+          "name": "name",
+          "value": "name28",
+          "disabled": false
+        },
+        {
+          "name": "status",
+          "value": "status29",
+          "disabled": false
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+        "grantType": "implicit"
+      },
+      "_type": "request",
+      "_id": "req_cd56fade56f84afca4996ec652a2dfe9",
+      "parentId": "fld_7429ef19b75549e49a62e5a1dab8d9af",
+      "description": "Updates a pet resource based on the form data."
+    },
+    {
+      "name": "deletePet",
+      "method": "DELETE",
+      "url": "{{default}}/pet/{petId}",
+      "headers": [
+        {
+          "name": "api_key",
+          "value": "api_key67",
+          "disabled": false
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+        "grantType": "implicit"
+      },
+      "_type": "request",
+      "_id": "req_30e6b1347b1741a09f3d62ed737a8d8e",
+      "parentId": "fld_7429ef19b75549e49a62e5a1dab8d9af",
+      "description": "Delete a pet."
+    },
+    {
+      "name": "uploadFile",
+      "method": "POST",
+      "url": "{{default}}/pet/{petId}/uploadImage",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          {
+            "type": "file",
+            "name": "body",
+            "value": "path/to/file88",
+            "disabled": false
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "additionalMetadata",
+          "value": "additionalMetadata78",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/octet-stream",
+          "disabled": false
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+        "grantType": "implicit"
+      },
+      "_type": "request",
+      "_id": "req_536b81f703234f908de2042a6ce2268a",
+      "parentId": "fld_7429ef19b75549e49a62e5a1dab8d9af",
+      "description": "Upload image of the pet."
+    },
+    {
+      "name": "getInventory",
+      "method": "GET",
+      "url": "{{default}}/store/inventory",
+      "headers": [
+        {
+          "name": "api_key",
+          "value": "api_key6",
+          "disabled": false
+        }
+      ],
+      "_type": "request",
+      "_id": "req_51a23f4f05d74aaa9faa23be761b5716",
+      "parentId": "fld_08b76efbc757484a8eeb863c7a43a8c7",
+      "description": "Returns a map of status codes to quantities."
+    },
+    {
+      "name": "placeOrder",
+      "method": "POST",
+      "url": "{{default}}/store/order",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {
+            "type": "text",
+            "name": "id",
+            "value": "10",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "petId",
+            "value": "198772",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "quantity",
+            "value": "7",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "shipDate",
+            "value": "2025-09-08T08:46:22.4656398Z",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "status",
+            "value": "approved",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "complete",
+            "value": "false",
+            "disabled": false
+          }
+        ]
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+          "disabled": false
+        }
+      ],
+      "_type": "request",
+      "_id": "req_1bb391e740b942b4bf05f747aea7d3e6",
+      "parentId": "fld_08b76efbc757484a8eeb863c7a43a8c7",
+      "description": "Place a new order in the store."
+    },
+    {
+      "name": "getOrderById",
+      "method": "GET",
+      "url": "{{default}}/store/order/{orderId}",
+      "_type": "request",
+      "_id": "req_15ac0982fc0c42ebbc4c8ee02c4a2dd3",
+      "parentId": "fld_08b76efbc757484a8eeb863c7a43a8c7",
+      "description": "For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions."
+    },
+    {
+      "name": "deleteOrder",
+      "method": "DELETE",
+      "url": "{{default}}/store/order/{orderId}",
+      "_type": "request",
+      "_id": "req_d708a9e2484c4eb0b521b00546b8de4b",
+      "parentId": "fld_08b76efbc757484a8eeb863c7a43a8c7",
+      "description": "For valid response try integer IDs with value < 1000. Anything above 1000 or non-integers will generate API errors."
+    },
+    {
+      "name": "createUser",
+      "method": "POST",
+      "url": "{{default}}/user",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {
+            "type": "text",
+            "name": "id",
+            "value": "10",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "username",
+            "value": "theUser",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "firstName",
+            "value": "John",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "lastName",
+            "value": "James",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "email",
+            "value": "john@email.com",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "password",
+            "value": "12345",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "phone",
+            "value": "12345",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "userStatus",
+            "value": "1",
+            "disabled": false
+          }
+        ]
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+          "disabled": false
+        }
+      ],
+      "_type": "request",
+      "_id": "req_d688c51e43f24eef9d8ccfd0dbbe9fea",
+      "parentId": "fld_adbc4671cec84b85912b2956e723ff5e",
+      "description": "This can only be done by the logged in user."
+    },
+    {
+      "name": "createUsersWithListInput",
+      "method": "POST",
+      "url": "{{default}}/user/createWithList",
+      "body": {
+        "mimeType": "application/json",
+        "text": "[\n  {\n    \"id\": 72,\n    \"username\": \"username0\",\n    \"firstName\": \"firstName65\",\n    \"lastName\": \"lastName70\",\n    \"email\": \"email44\",\n    \"password\": \"password71\",\n    \"phone\": \"phone97\",\n    \"userStatus\": 16\n  }\n]"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "_type": "request",
+      "_id": "req_141a9de710884125a258031b68d2e70a",
+      "parentId": "fld_adbc4671cec84b85912b2956e723ff5e",
+      "description": "Creates list of users with given input array."
+    },
+    {
+      "name": "loginUser",
+      "method": "GET",
+      "url": "{{default}}/user/login",
+      "parameters": [
+        {
+          "name": "username",
+          "value": "username32",
+          "disabled": false
+        },
+        {
+          "name": "password",
+          "value": "password44",
+          "disabled": false
+        }
+      ],
+      "_type": "request",
+      "_id": "req_96dfcb291c654269a500ae1e0606eed4",
+      "parentId": "fld_adbc4671cec84b85912b2956e723ff5e",
+      "description": "Log into the system."
+    },
+    {
+      "name": "logoutUser",
+      "method": "GET",
+      "url": "{{default}}/user/logout",
+      "_type": "request",
+      "_id": "req_e656e979eaf1404c8053dcea99675ef2",
+      "parentId": "fld_adbc4671cec84b85912b2956e723ff5e",
+      "description": "Log user out of the system."
+    },
+    {
+      "name": "getUserByName",
+      "method": "GET",
+      "url": "{{default}}/user/{usersname}",
+      "_type": "request",
+      "_id": "req_04f3f6d69b26425d8f58036f610aea8d",
+      "parentId": "fld_adbc4671cec84b85912b2956e723ff5e",
+      "description": "Get user detail based on username."
+    },
+    {
+      "name": "updateUser",
+      "method": "PUT",
+      "url": "{{default}}/user/{usersname}",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {
+            "type": "text",
+            "name": "id",
+            "value": "10",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "username",
+            "value": "theUser",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "firstName",
+            "value": "John",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "lastName",
+            "value": "James",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "email",
+            "value": "john@email.com",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "password",
+            "value": "12345",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "phone",
+            "value": "12345",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "userStatus",
+            "value": "1",
+            "disabled": false
+          }
+        ]
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded",
+          "disabled": false
+        }
+      ],
+      "_type": "request",
+      "_id": "req_790e0e2ecc044ac5ac404afd0f7af5e0",
+      "parentId": "fld_adbc4671cec84b85912b2956e723ff5e",
+      "description": "This can only be done by the logged in user."
+    },
+    {
+      "name": "deleteUser",
+      "method": "DELETE",
+      "url": "{{default}}/user/{usersname}",
+      "_type": "request",
+      "_id": "req_cd69e2c7228a4995b58878f2f0de8ae8",
+      "parentId": "fld_adbc4671cec84b85912b2956e723ff5e",
+      "description": "This can only be done by the logged in user."
+    }
+  ]
+}

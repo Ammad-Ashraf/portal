@@ -1,0 +1,1100 @@
+swagger: '2.0'
+info:
+  version: '1.0.26'
+  title: Swagger Petstore - OpenAPI 3.0
+  description: >-
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+
+    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
+
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+
+
+    Some useful links:
+
+    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
+
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  contact:
+    email: apiteam@swagger.io
+host: petstore3.swagger.io
+basePath: /api/v3
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+    scopes:
+      write:pets: modify pets in your account
+      read:pets: read your pets
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /pet:
+    put:
+      description: Update an existing pet by Id.
+      summary: updatePet
+      tags:
+      - pet
+      operationId: updatePet
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/x-www-form-urlencoded
+        type: string
+        description: ''
+      - name: name
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: photoUrls
+        in: formData
+        required: true
+        type: array
+        items:
+          type: string
+        description: ''
+      - name: id
+        in: formData
+        required: false
+        type: integer
+        format: int64
+        description: ''
+      - name: category
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: tags
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: ''
+      - name: status
+        in: formData
+        required: false
+        enum:
+        - available
+        - pending
+        - sold
+        type: string
+        description: pet status in the store
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Pet'
+          headers: {}
+        '400':
+          description: Invalid ID supplied
+          headers: {}
+        '404':
+          description: Pet not found
+          headers: {}
+        '422':
+          description: Validation exception
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+    post:
+      description: Add a new pet to the store.
+      summary: addPet
+      tags:
+      - pet
+      operationId: addPet
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/x-www-form-urlencoded
+        type: string
+        description: ''
+      - name: name
+        in: formData
+        required: true
+        type: string
+        description: ''
+      - name: photoUrls
+        in: formData
+        required: true
+        type: array
+        items:
+          type: string
+        description: ''
+      - name: id
+        in: formData
+        required: false
+        type: integer
+        format: int64
+        description: ''
+      - name: category
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: tags
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: ''
+      - name: status
+        in: formData
+        required: false
+        enum:
+        - available
+        - pending
+        - sold
+        type: string
+        description: pet status in the store
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Pet'
+          headers: {}
+        '400':
+          description: Invalid input
+          headers: {}
+        '422':
+          description: Validation exception
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+  /pet/findByStatus:
+    get:
+      description: Multiple status values can be provided with comma separated strings.
+      summary: findPetsByStatus
+      tags:
+      - pet
+      operationId: findPetsByStatus
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: status
+        in: query
+        required: false
+        enum:
+        - available
+        - pending
+        - sold
+        type: string
+        description: Status values that need to be considered for filter
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Pet'
+          headers: {}
+        '400':
+          description: Invalid status value
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+  /pet/findByTags:
+    get:
+      description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
+      summary: findPetsByTags
+      tags:
+      - pet
+      operationId: findPetsByTags
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: tags
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        description: Tags to filter by
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Pet'
+          headers: {}
+        '400':
+          description: Invalid tag value
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+  /pet/{petId}:
+    get:
+      description: Returns a single pet.
+      summary: getPetById
+      tags:
+      - pet
+      operationId: getPetById
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: petId
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: ID of pet to return
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Pet'
+          headers: {}
+        '400':
+          description: Invalid ID supplied
+          headers: {}
+        '404':
+          description: Pet not found
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+      security:
+      - api_key: []
+      - petstore_auth:
+        - write:pets
+        - read:pets
+    post:
+      description: Updates a pet resource based on the form data.
+      summary: updatePetWithForm
+      tags:
+      - pet
+      operationId: updatePetWithForm
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: petId
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: ID of pet that needs to be updated
+      - name: name
+        in: query
+        required: false
+        type: string
+        description: Name of pet that needs to be updated
+      - name: status
+        in: query
+        required: false
+        type: string
+        description: Status of pet that needs to be updated
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Pet'
+          headers: {}
+        '400':
+          description: Invalid input
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+    delete:
+      description: Delete a pet.
+      summary: deletePet
+      tags:
+      - pet
+      operationId: deletePet
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: petId
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: Pet id to delete
+      - name: api_key
+        in: header
+        required: false
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: Pet deleted
+          headers: {}
+        '400':
+          description: Invalid pet value
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+  /pet/{petId}/uploadImage:
+    post:
+      description: Upload image of the pet.
+      summary: uploadFile
+      tags:
+      - pet
+      operationId: uploadFile
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/octet-stream
+      parameters:
+      - name: petId
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: ID of pet to update
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/octet-stream
+        type: string
+        description: ''
+      - name: additionalMetadata
+        in: query
+        required: false
+        type: string
+        description: Additional Metadata
+      - name: body
+        in: formData
+        required: false
+        type: file
+        format: file
+        description: ''
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ApiResponse'
+          headers: {}
+        '400':
+          description: No file uploaded
+          headers: {}
+        '404':
+          description: Pet not found
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+  /store/inventory:
+    get:
+      description: Returns a map of status codes to quantities.
+      summary: getInventory
+      tags:
+      - store
+      operationId: getInventory
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int32
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+      security:
+      - api_key: []
+  /store/order:
+    post:
+      description: Place a new order in the store.
+      summary: placeOrder
+      tags:
+      - store
+      operationId: placeOrder
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/x-www-form-urlencoded
+        type: string
+        description: ''
+      - name: id
+        in: formData
+        required: false
+        type: integer
+        format: int64
+        description: ''
+      - name: petId
+        in: formData
+        required: false
+        type: integer
+        format: int64
+        description: ''
+      - name: quantity
+        in: formData
+        required: false
+        type: integer
+        format: int32
+        description: ''
+      - name: shipDate
+        in: formData
+        required: false
+        type: string
+        format: date-time
+        description: ''
+      - name: status
+        in: formData
+        required: false
+        enum:
+        - placed
+        - approved
+        - delivered
+        type: string
+        description: Order Status
+      - name: complete
+        in: formData
+        required: false
+        type: boolean
+        description: ''
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Order'
+          headers: {}
+        '400':
+          description: Invalid input
+          headers: {}
+        '422':
+          description: Validation exception
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+  /store/order/{orderId}:
+    get:
+      description: For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.
+      summary: getOrderById
+      tags:
+      - store
+      operationId: getOrderById
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: ID of order that needs to be fetched
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Order'
+          headers: {}
+        '400':
+          description: Invalid ID supplied
+          headers: {}
+        '404':
+          description: Order not found
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+    delete:
+      description: For valid response try integer IDs with value < 1000. Anything above 1000 or non-integers will generate API errors.
+      summary: deleteOrder
+      tags:
+      - store
+      operationId: deleteOrder
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: ID of the order that needs to be deleted
+      responses:
+        '200':
+          description: order deleted
+          headers: {}
+        '400':
+          description: Invalid ID supplied
+          headers: {}
+        '404':
+          description: Order not found
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+  /user:
+    post:
+      description: This can only be done by the logged in user.
+      summary: createUser
+      tags:
+      - user
+      operationId: createUser
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/x-www-form-urlencoded
+        type: string
+        description: ''
+      - name: id
+        in: formData
+        required: false
+        type: integer
+        format: int64
+        description: ''
+      - name: username
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: firstName
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: lastName
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: email
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: password
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: phone
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: userStatus
+        in: formData
+        required: false
+        type: integer
+        format: int32
+        description: User Status
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User'
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+  /user/createWithList:
+    post:
+      description: Creates list of users with given input array.
+      summary: createUsersWithListInput
+      tags:
+      - user
+      operationId: createUsersWithListInput
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      consumes:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: false
+        description: ''
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/User'
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+  /user/login:
+    get:
+      description: Log into the system.
+      summary: loginUser
+      tags:
+      - user
+      operationId: loginUser
+      deprecated: false
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - name: username
+        in: query
+        required: false
+        type: string
+        description: The user name for login
+      - name: password
+        in: query
+        required: false
+        type: string
+        description: The password for login in clear text
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            xml:
+              name: response200
+              attribute: false
+              wrapped: false
+            type: string
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              type: string
+            X-Expires-After:
+              description: date in UTC when token expires
+              type: string
+        '400':
+          description: Invalid username/password supplied
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+  /user/logout:
+    get:
+      description: Log user out of the system.
+      summary: logoutUser
+      tags:
+      - user
+      operationId: logoutUser
+      deprecated: false
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+  /user/{usersname}:
+    get:
+      description: Get user detail based on username.
+      summary: getUserByName
+      tags:
+      - user
+      operationId: getUserByName
+      deprecated: false
+      produces:
+      - application/json
+      - application/xml
+      parameters:
+      - name: usersname
+        in: path
+        required: true
+        type: string
+        description: The username that needs to be processed
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User'
+          headers: {}
+        '400':
+          description: Invalid username supplied
+          headers: {}
+        '404':
+          description: User not found
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+    put:
+      description: This can only be done by the logged in user.
+      summary: updateUser
+      tags:
+      - user
+      operationId: updateUser
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: usersname
+        in: path
+        required: true
+        type: string
+        description: The username that needs to be processed
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/x-www-form-urlencoded
+        type: string
+        description: ''
+      - name: id
+        in: formData
+        required: false
+        type: integer
+        format: int64
+        description: ''
+      - name: username
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: firstName
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: lastName
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: email
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: password
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: phone
+        in: formData
+        required: false
+        type: string
+        description: ''
+      - name: userStatus
+        in: formData
+        required: false
+        type: integer
+        format: int32
+        description: User Status
+      responses:
+        '200':
+          description: successful operation
+          headers: {}
+        '400':
+          description: bad request
+          headers: {}
+        '404':
+          description: user not found
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+    delete:
+      description: This can only be done by the logged in user.
+      summary: deleteUser
+      tags:
+      - user
+      operationId: deleteUser
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: usersname
+        in: path
+        required: true
+        type: string
+        description: The username that needs to be processed
+      responses:
+        '200':
+          description: User deleted
+          headers: {}
+        '400':
+          description: Invalid username supplied
+          headers: {}
+        '404':
+          description: User not found
+          headers: {}
+        default:
+          description: Unexpected error
+          headers: {}
+definitions:
+  Order:
+    title: Order
+    xml:
+      name: order
+      attribute: false
+      wrapped: false
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      petId:
+        type: integer
+        format: int64
+      quantity:
+        type: integer
+        format: int32
+      shipDate:
+        type: string
+        format: date-time
+      status:
+        type: object
+        allOf:
+        - $ref: '#/definitions/OrderStatus'
+        - description: Order Status
+      complete:
+        type: boolean
+  Category:
+    title: Category
+    xml:
+      name: category
+      attribute: false
+      wrapped: false
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+  User:
+    title: User
+    xml:
+      name: user
+      attribute: false
+      wrapped: false
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      username:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userStatus:
+        description: User Status
+        type: integer
+        format: int32
+  Tag:
+    title: Tag
+    xml:
+      name: tag
+      attribute: false
+      wrapped: false
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+  Pet:
+    title: Pet
+    xml:
+      name: pet
+      attribute: false
+      wrapped: false
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      category:
+        type: object
+        allOf:
+        - $ref: '#/definitions/Category'
+        - xml:
+            name: category
+            attribute: false
+            wrapped: false
+      photoUrls:
+        xml:
+          name: photoUrls
+          attribute: false
+          wrapped: true
+        type: array
+        items:
+          xml:
+            name: photoUrl
+            attribute: false
+            wrapped: false
+          type: string
+      tags:
+        xml:
+          name: tags
+          attribute: false
+          wrapped: true
+        type: array
+        items:
+          $ref: '#/definitions/Tag'
+      status:
+        type: object
+        allOf:
+        - $ref: '#/definitions/PetStatus'
+        - description: pet status in the store
+    required:
+    - name
+    - photoUrls
+  ApiResponse:
+    title: ApiResponse
+    xml:
+      name: default
+      attribute: false
+      wrapped: false
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+  PetStatus:
+    title: PetStatus
+    description: pet status in the store
+    type: string
+    enum:
+    - available
+    - pending
+    - sold
+  OrderStatus:
+    title: OrderStatus
+    description: Order Status
+    example: approved
+    type: string
+    enum:
+    - placed
+    - approved
+    - delivered
+security: []
+tags:
+- name: pet
+  description: Everything about your Pets
+  externalDocs:
+    url: https://swagger.io
+    description: Find out more
+- name: store
+  description: Access to Petstore orders
+  externalDocs:
+    url: https://swagger.io
+    description: Find out more about our store
+- name: user
+  description: Operations about user
+externalDocs:
+  url: https://swagger.io
+  description: Find out more about Swagger
